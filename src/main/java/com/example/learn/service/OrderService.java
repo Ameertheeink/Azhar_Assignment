@@ -23,5 +23,15 @@ public Order getOrderById(Long id){
 return orderRepo.findById(id).orElseThrow(()->new RuntimeException("Order id not found"));
     }
 
+public List<Order> searchItem(String keySearch){
+        return orderRepo.findByContains(keySearch);
+}
 
+public Order updateOrder(Order updatedOrder,Long id){
+        if(orderRepo.existsById(id)){
+            updatedOrder.setId(id);
+            return orderRepo.save(updatedOrder);
+        }
+        return null;
+}
 }
